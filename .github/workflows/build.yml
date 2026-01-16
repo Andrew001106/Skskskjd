@@ -7,15 +7,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # Используем другой, более простой способ запуска buildozer
       - name: Build with Buildozer
-        uses: ArtemSBulgakov/buildozer-action@v1
+        uses: docker://ghcr.io/kivy/buildozer:master
         with:
-          buildozer_version: master
-          python_version: 3.11
-
+          args: android debug
+          
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: my-app-bundle
+          name: my-app
           path: bin/*.apk
           
